@@ -1,38 +1,1712 @@
-.App {
-  text-align: center;
+*{
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+.TotalNav{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 999;
+  padding: 30px 0px;
+  background-color: whitesmoke;
+  position: fixed;
+  width: 100%;
+}
+.NavItems{
+  display: flex;
+  gap: 20px;
+}
+.NavItems>a{
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 18px;
+  padding:10px 15px;
+  color: #263238;
+}
+.NavItems>a:hover{
+  background-color: #B71C1C;
+  color: white;
+  padding:10px 15px;
+  border-radius: 5px;
+  transition: 0.3s ease;
+}
+.NavLogo{
+  color: #B71C1C;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.NavLogo:hover{
+  color: #263238;
+  transition: 0.4s ease-in;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* ===================== Home page ====================== */
+.Total_Home {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 100px;
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  gap: 40px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.HomeLogo {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  text-align: center;
+}
+
+.HomeLogo > h1 {
+  font-size: 60px;
+  color: #B71C1C;
+  letter-spacing: 2px;
+  font-weight: 800;
+  overflow: hidden; /* Hide overflow for the typing effect */
+  white-space: nowrap; /* Prevent line breaks */
+  margin: 0;
+  padding: 0;
+}
+
+.HomeLogo > a {
+  text-decoration: none;
+  background-color: #B71C1C;
+  color: white;
+  padding: 10px 10px;
+  font-size: 20px;
+  font-weight: 500;
+  border-radius: 5px;
+  border: 2px solid #fff;  
+  margin-top: 20px;
+}
+
+.HomeLogo > a:hover {
+  background-color: white;
+  border: 2px solid #B71C1C;
+  transition: 0.3s ease-in-out;
+  color: #B71C1C;
+}
+
+.Total_Home img {
+  max-width: 300px;
+  width: 100%; /* Scale down image on smaller devices */
+  height: auto;
+}
+
+
+
+/* <-----------------Service Cards--------------------------> */
+
+.Total_cards{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding:50px 0px;
+}
+.card {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  perspective: 1000px;
+  box-shadow: 0 0 0 5px #ffffff80;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  object-fit:fill;
+  cursor: pointer;
+  left: 10px;
+}
+
+.card img {
+  width:200px;
+  height: 200px;
+  fill: #333;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+}
+
+.card__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #f2f2f2;
+  transform: rotateX(-90deg);
+  transform-origin: bottom;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card:hover .card__content {
+  transform: rotateX(0deg);
+}
+
+.card__title {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+  font-weight: 700;
+}
+
+.card:hover svg {
+  scale: 0;
+}
+
+.card__description {
+  margin: 10px 0 0;
+  font-size: 14px;
+  color: #777;
+  line-height: 1.4;
+}
+.Total_Services_Cards{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 0px;
+}
+.Total_Services_Cards>h1{
+  font-size: 60px;
+  color: #B71C1C;
+  letter-spacing: 2px;
+  font-weight: 800;
+}
+
+/* <--------------------------------------------------SignUp--------------------------------------------------> */
+
+.Total_SignUp{
+  background-color: #B71C1C;
+  height:120vh;
+}
+.signUp_Page{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffff;
+  max-width: 600px;
+  height: 300px;
+  margin: auto;
+  border-radius: 10px;
+  position: relative;
+  top: 200px;
+  gap: 40px;
+}
+.SignUp_ButtonDiv{
+  display: flex;
+  gap: 25px;
+}
+.SignUp_ButtonDiv >.Link{
+  background-color: #B71C1C;
+  border: 2px solid #ffff;
+  color: #ffff;
+  padding:15px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: #ffff;
+  align-self: center;
+}
+
+.SignUp_ButtonDiv > .Link:hover{
+  border: 2px solid #B71C1C;
+  color: #B71C1C;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #ffff;
+  transition: 0.3s ease-in-out;
+}
+.Link:hover{
+  color: #B71C1C;
+}
+.signUp_Page>h1{
+  font-size: 60px;
+  letter-spacing: 2px;
+}
+.signUp_Page>p{
+  font-size: 20px;
+  font-weight: 500
+}
+.Total_UserForm{
+  background-color: #da6f3e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width:auto;
+  height:auto;
+  gap: 30px;
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  border-radius: 2px;
+  padding: 10px 20px;
+  animation: leftSlide 0.3s ease-in;
+}
+.Form_Title{
+display: flex;
+flex-direction: column;
+width:85%;
+}
+.Form_Title>h1{
+  align-self: flex-start;
+}
+.Form_Title>i{
+  align-self: flex-end;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.Total_UserForm .User_Form form{
+  display:flex;
+  flex-direction:column;
+  gap: 20px;
+}
+.Total_UserForm .User_Form form>input[type="file"]{
+  display: none;
+}
+
+.Total_UserForm .User_Form form>label{
+  width: 400px;
+  height: 40px;
+  border:none;
+  outline: none;
+  border-radius: 3px;
+  padding-left: 20px;
+  font-size: 17px;
+  font-weight: 500;
+  background-color: white;
+  padding-top: 10px;
+}
+
+.Total_UserForm .User_Form form>input{
+    width: 400px;
+    height: 40px;
+    border:none;
+    outline: none;
+    border-radius: 3px;
+    padding-left: 20px;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.Total_KarmikaForm{
+  background-color: #da6f3e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width:auto;
+  height:auto;
+  padding: 30px 20px;
+  gap: 30px;
+  position: absolute;
+  top: 100px;
+  right: 100px;
+  border-radius: 2px;
+  animation: rightSlide 0.3s ease-in;
+}
+
+.Karmika_Form form{
+  display:flex;
+  flex-direction:column;
+  gap: 20px;
+}
+.Karmika_Form form>input[type="file"]{
+  display: none;
+}
+
+.Karmika_Form form>input{
+  width: 400px;
+  height: 40px;
+  border:none;
+  outline: none;
+  border-radius: 3px;
+  padding-left: 20px;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.Karmika_Form form>label{
+  background-color: white;
+  width: 400px;
+  height: 40px;
+  border:none;
+  outline: none;
+  border-radius: 3px;
+  padding-left: 20px;
+  font-size: 17px;
+  font-weight: 500;
+  align-self: center;
+  justify-self: center;
+  padding-top: 10px;
+}
+
+.spanInput{
+background-color: #ffff;
+border-radius: 3px;
+padding-left: 20px;
+font-size: 17px;
+font-weight: 500;
+width: 400px;
+height: 40px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+border: none;
+outline: none;
+padding-right: 20px;
+}
+ .spanInput>input{
+  border: none;
+  outline:none;
+  font-size: 17px;
+}
+ .spanInput>i{
+  cursor: pointer;
+}
+.spanInputFile{
+  background-color: white;
+  padding-top: 10px;
+}
+.Karmika_Form form>.select{
+  width: 400px;
+  height: 40px;
+  border:none;
+  outline: none;
+  border-radius: 3px;
+  padding-left: 20px;
+  font-size: 17px;
+  font-weight: 500;
+
+}
+
+@keyframes leftSlide {
+  from {
+    transform: translateX(100%);
+  }
+  t0{
+    transform: translateX(0%);
+  }
+}
+
+@keyframes rightSlide {
+  from{
+    transform: translateX(-100%);
+  }
+  to{
+    transform: translateX(10%);
+  }
+}
+
+
+.Total_Login{
+  background-color: #B71C1C;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 250px 200px;
+}
+.Login_Title{
+  background-color: white;
+  height: 300px;
+  width:400px;
+  padding: 20px;
+  border-radius: 10px 0px 0px 10px;
+}
+.Login_Title>h1{
+  font-size: 40px;
+}
+.Login_Title>h2{
+  font-size: 60px;
+  margin-top: 30px;
+  color: #B71C1C;
+}
+.Login_Fields{
+  background-color: #da6f3e;
+  width: 400px;
+  height:300px;
+  border-radius: 0px 10px 10px 0px;
+}
+.Login_Fields{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+.Login_Fields>form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 20px;
+}
+.Login_Fields>form>input{
+  width: 300px;
+  height: 40px;
+  border:none;
+  outline: none;
+  border-radius: 3px;
+  padding-left: 20px;
+  font-size: 17px;
+  font-weight: 500;
+
+}
+.spanInputLogin{
+  background-color: #ffff;
+border-radius: 3px;
+padding-left: 20px;
+font-size: 17px;
+font-weight: 500;
+width: 300px;
+height: 40px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+border: none;
+outline: none;
+padding-right: 20px;
+}
+.spanInputLogin>input{
+  border: none;
+  outline:none;
+  font-size: 17px;
+}
+
+.Login_Fields>p{
+  font-size: 20px;
+  font-weight: 500
+}
+
+
+
+/* ======================= About Page========================== */
+
+
+
+.About_Heading {
+  justify-self: center;
+  align-self: center;
+  font-size: 60px;
+  color: #B71C1C;
+  letter-spacing: 2px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.SubTotal {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  gap: 100px;
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  padding: 40px 20px;
+}
+
+.About_Image > img {
+  max-width: 400px;
+  width: 100%; /* Make image scale down on small screens */
+  border-radius: 10px;
+  box-shadow: 50px 50px 0px #980a0a;
+  transition: 0.3s ease;
+}
+
+.About_Image > img:hover {
+  box-shadow: 0px 0px 0px #ffffff;
+  position: relative;
+  left: 50px;
+  top: 50px;
+  transition: 0.3s ease-in;
+}
+
+.AboutPera {
+  max-width: 600px;
+}
+
+.AboutPera > p {
+  font-size: 20px;
+  text-align: justify;
+  margin-top: 20px;
+  letter-spacing: 1px;
+  line-height: 30px;
+}
+
+
+.Total_Nav{
+  background-color: #980a0a;
+  display: flex;
+  flex-direction: column;
+  padding: 80px 90px;
+}
+.Total_Nav>h1{
+  color: white;
+  letter-spacing: 2px;
+  font-size: 40px;
+}
+
+
+.Total_Nav {
+  background-color: #222; /* Dark background for contrast */
+  padding: 20px;
+  text-align: center;
+}
+
+.Total_Nav h1 {
+  color: white;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+/* Footer Info Container */
+.footer_info {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 40px 20px;
+  align-items: flex-start;
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  gap: 30px;
+}
+
+.foot_Items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 200px; /* Prevent items from being too narrow */
+}
+
+.foot_Items > h2 {
+  color: white;
+  font-size: 22px;
+  letter-spacing: 0.5px;
+}
+
+.footer_info .foot_Items > p {
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.footer_info .foot_Items > p:hover {
+  text-decoration: underline;
+}
+
+/* Social Icons */
+.Foot_Icons {
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-start;
+  font-size: 24px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.Foot_Icons > i {
+  color: white;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.Foot_Icons > i:hover {
+  color: #ff9800; /* Highlight color on hover */
+}
+
+/* ========================= Service card ====================== */
+
+.karmika_details_button{
+  background-color: rgb(0, 81, 128);
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 2px;
+}
+.Total_Servies {
+  padding: 100px 0px 0px 0px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap; /* Allow wrap on smaller screens */
+}
+
+.search_Option_Div {
+  width: 20%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px 20px;
+  gap: 30px;
+  background-color: whitesmoke;
+  margin: 40px 20px;
+  border-radius: 5px;
+  border: 1px solid #980a0a;
+  min-width: 220px; /* Prevent too narrow */
+}
+
+.search_Option_Div > select {
+  width: 100%;
+  height: 40px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+.search_Option_Div > button {
+  background-color: white;
+  width: 180px;
+  height: 40px;
+  outline: none;
+  border: 1px solid #980a0a;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.3s ease-in;
+}
+
+.search_Option_Div > button:hover {
+  background-color: #980a0a;
+  border: 1px solid white;
+  color: white;
+  font-weight: 600;
+}
+
+.search_karmikas_Div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 20px;
+  gap: 40px;
+}
+
+.Seach_div {
+  background-color: #980a0a;
+  width: 350px;
+  max-width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 10px;
+}
+
+.Seach_div > input {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: white;
+  font-size: 18px;
+  width: 80%;
+}
+
+.Seach_div > i {
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+}
+
+.total_Karmikas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+
+.Karmika_Card {
+  background-color: white;
+  width: 350px;
+  max-width: 100%;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 1px 3px 4px 0.5px rgb(166, 165, 165);
+  padding: 20px 0px;
+  gap: 30px;
+}
+
+.Karmika_Price{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.Karmika_Price p{
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.Karmika_Price a{
+  background-color: green;
+  padding: 10px 15px;
+  border-radius: 50%;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.karmika_buttons{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.karmika_buttons a{
+  background-color: #0a5898;
+  color: white;
+  padding: 8px 8px;
+  text-decoration: none;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+}
+
+
+.Karmika_Card > img {
+  width: 300px;
+  max-width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 3px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.Karmika_Card > img:hover {
+  transform: scale(1.06);
+}
+
+/* .Total_Account_page{
+  display: flex;
+  align-items: center;
+  position: relative;
+  top: 100px;
+  flex-direction: column;
+}
+
+
+.Account_Top{
+  width: 100%;
+  height: 50vh;
+  background-color: #980a0a;
+
+}
+.Account_Top>h1{
+  color: white;
+  font-size: 50px;
+  align-self: center;
+  justify-self: center;
+}
+
+.Account_bottom .Profile_Card{
+  width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  position: relative;
+  bottom: 200px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 20px rgb(179, 175, 175);
+  gap: 20px;
+  height: auto;
+  padding: 50px 20px;
+}
+.Profile_Card .Profile>img{
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 10px solid white;
+}
+.Profile_Card .User_Details{
+  color: #980a0a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Profile_Card .User_Details>h1{
+  font-size: 60px;
+  letter-spacing: 1px;
+}
+
+.Profile_Card .User_Details>p{
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.Profile_Card .User_Details1{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+.Profile_Card .User_Details1>p{
+  text-align: justify;
+  font-size: 20px;
+  font-weight: 600;
+  width: 80%;
+}
+
+.Profile_Card .User_Details1>h5{
+  color: #980a0a;
+  font-size: 30px;
+  letter-spacing: 2px;
+}
+
+.Profile_Card>button{
+  background-color: #980a0a;
+  width: 200px;
+  height: 50px;
+  color: white;
+  font-size: 20px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.Profile_Card>button > .link{
+  text-decoration: none;
+  color: white;
+} */
+
+
+/* Main layout adjustments */
+.Total_Account_page {
+  display: flex;
+  align-items: center;
+  position: relative;
+  top: 100px;
+  flex-direction: column;
+}
+
+/* Top section */
+.Account_Top {
+  width: 100%;
+  height: 50vh;
+  background-color: #980a0a;
+}
+
+.Account_Top > h1 {
+  color: white;
+  font-size: 50px;
+  text-align: center;
+}
+
+/* Profile Card */
+.Account_bottom .Profile_Card {
+  width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  position: relative;
+  bottom: 200px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 20px rgb(179, 175, 175);
+  gap: 20px;
+  height: auto;
+  padding: 50px 20px;
+}
+
+.Profile_Card .Profile > img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 10px solid white;
+}
+
+.Profile_Card .User_Details {
+  color: #980a0a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.Profile_Card .User_Details > h1 {
+  font-size: 60px;
+  letter-spacing: 1px;
+}
+
+.Profile_Card .User_Details > p {
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.Profile_Card .User_Details1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.Profile_Card .User_Details1 > p {
+  text-align: justify;
+  font-size: 20px;
+  font-weight: 600;
+  width: 80%;
+}
+
+.Profile_Card .User_Details1 > h5 {
+  color: #980a0a;
+  font-size: 30px;
+  letter-spacing: 2px;
+}
+
+.Profile_Card > button {
+  background-color: #980a0a;
+  width: 200px;
+  height: 50px;
+  color: white;
+  font-size: 20px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.Profile_Card > button:hover {
+  background-color: #b51212;
+}
+
+.Profile_Card > button > .link {
+  text-decoration: none;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+
+
+/* .Total_Details{
+  background-color: #0a5898;
+  max-width: 600px;
+  border-radius: 5px;
+  position: fixed;
+  top: 150px;
+  left: 100px;
+  z-index: 999;
+  animation: rightSlide 0.2s ease-in;
+  padding: 20px;
+}
+.Image_Div{
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+
+.Image_Div .profileImage_Details>img{
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid white;
+  position: relative;
+  bottom: 70px;
+  left: 200px;
+}
+.Image_Div >i{
+  font-size: 35px;
+  color: white;
+  align-self: flex-start;
+  position:relative;
+  top: 20px;
+  right: 30px;
+  cursor: pointer;
+}
+.Details_Div{
+  display: flex;
+  justify-content: center;
+  
+
+}
+.Details_Div .main_Details{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  object-fit: contain;
+  gap: 5px;
+
+}
+.Details_Div .main_Details>img{
+  max-width: 300px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+.Details_Div .main_Details>h2{
+  color: white;
+
+}
+.Details_Div .main_Details>p{
+  color: white;
+}
+
+.sub_MainDetails{
+  margin-left: 30px;
+  width: 230px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.sub_MainDetails>p{
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  
+}
+.sub_MainDetails>a{
+  max-width: 170px;
+  padding:0.8rem 1rem;
+  border:2px solid white;
+  border-radius: 2px;
+  background-color: transparent;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: 0.3s ease-in;
+  text-decoration: none;
+}
+.sub_MainDetails>a:hover{
+  border: 2px solid #0a5898;
+  background-color:white;
+  border-radius: 2px;
+  color: #0a5898;
+  transition: 0.3s ease-out;
+} */
+
+.Total_Details {
+  background-color: #0a5898;
+  max-width: 600px;
+  width: 90%;
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  animation: rightSlide 0.2s ease-in;
+  padding: 20px;
+}
+
+/* Profile + Close Button */
+.Image_Div {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Image_Div .profileImage_Details > img {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid white;
+  position: static; /* Remove the offset for better responsiveness */
+  margin: 0 auto;
+}
+
+.Image_Div > i {
+  font-size: 35px;
+  color: white;
+  align-self: flex-start;
+  position: relative;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+/* Details Layout */
+.Details_Div {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* Allow wrapping for small screens */
+  gap: 20px;
+}
+
+.Details_Div .main_Details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.Details_Div .main_Details > img {
+  max-width: 280px;
+  width: 95%;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.Details_Div .main_Details > h2,
+.Details_Div .main_Details > p {
+  color: white;
+}
+
+/* Sub Details */
+.sub_MainDetails {
+  width: 230px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sub_MainDetails > p {
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.sub_MainDetails > a {
+  max-width: 170px;
+  padding: 0.8rem 1rem;
+  border: 2px solid white;
+  border-radius: 2px;
+  background-color: transparent;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: 0.3s ease-in;
+  text-decoration: none;
+}
+
+.sub_MainDetails > a:hover {
+  border: 2px solid #0a5898;
+  background-color: white;
+  color: #0a5898;
+  transition: 0.3s ease-out;
+}
+
+
+.not_logged_in{
+  font-size: 70px;
+}
+
+
+@media  screen and (max-width:720px) {
+
+  .TotalNav{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .NavItems{
+    display: flex;
+    gap: 15px;
+  }
+
+  .NavItems>a{
+    padding:5px 5px;
+    color: #263238;
+  }
+.NavItems>a:hover{
+    padding:5px 5px;
+  }
+
+  .Total_Home{
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+  }
+  .HomeLogo{
+    max-width:100%;
+  }
+  .HomeLogo>h1{
+    font-size: 30px;
+  }
+
+  .HomeLogo>a{
+  padding: 5px 5px;
+  border-radius: 3px; 
+  }
+
+
+.SubTotal{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 20px;
+}
+
+.SubTotal .AboutCard{
+  max-width: 100%;
+}
+.About_Image>img{
+  max-width: 200px;
+  object-fit: cover;
+  box-shadow: 20px 20px 0px #980a0a;
+}
+.About_Image>img:hover{
+  left: 20px;
+  top: 20px;
+}
+.SubTotal .AboutPera .About_Heading{
+  font-size: 30px;
+}
+
+
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer_info {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .foot_Items {
+    align-items: center;
+  }
+
+  .Foot_Icons {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .foot_Items > h2 {
+    font-size: 18px;
+  }
+
+  .footer_info .foot_Items > p {
+    font-size: 14px;
+  }
+
+  .Total_Nav h1 {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .About_Heading {
+    font-size: 48px;
+  }
+
+  .SubTotal {
+    gap: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .SubTotal {
+    flex-direction: column; /* Stack image and text */
+    text-align: center;
+  }
+
+  .AboutPera {
+    max-width: 90%;
+  }
+
+  .About_Heading {
+    font-size: 40px;
+  }
+
+  .AboutPera > p {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .About_Image > img {
+    box-shadow: 20px 20px 0px #980a0a;
+  }
+
+  .About_Image > img:hover {
+    left: 0;
+    top: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .About_Heading {
+    font-size: 32px;
+  }
+
+  .AboutPera > p {
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .About_Image > img {
+    box-shadow: 10px 10px 0px #980a0a;
+  }
+}
+
+@media (max-width: 1024px) {
+  .Total_Home {
+    padding: 60px 40px;
+    gap: 30px;
+  }
+
+  .HomeLogo > h1 {
+    font-size: 48px;
+  }
+
+  .HomeLogo > a {
+    font-size: 18px;
+    padding: 8px 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .Total_Home {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding: 40px 20px;
+    padding-top: 100px;
+  }
+
+  .HomeLogo > h1 {
+    font-size: 40px;
+  }
+
+  .Total_Home img {
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .HomeLogo > h1 {
+    font-size: 28px;
+  }
+
+  .HomeLogo > a {
+    font-size: 16px;
+    padding: 8px 12px;
+  }
+
+  .Total_Home img {
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .Total_Servies {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .search_Option_Div {
+    width: 80%;
+    margin: 20px 0;
+  }
+
+  .search_karmikas_Div {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .search_Option_Div {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .Seach_div {
+    width: 90%;
+  }
+
+  .Karmika_Card {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .search_Option_Div > select,
+  .search_Option_Div > button {
+    font-size: 16px;
+    height: 38px;
+  }
+
+  .Karmika_Card {
+    padding: 15px;
+  }
+
+  .Karmika_Price > p {
+    font-size: 24px;
+  }
+}
+
+/* ====================== RESPONSIVE ====================== */
+
+/* Tablet view */
+@media (max-width: 1024px) {
+  .Account_bottom .Profile_Card {
+    width: 450px;
+    padding: 40px 15px;
+    margin-top: 100px;
+  }
+  .Profile_Card .User_Details > h1 {
+    font-size: 45px;
+  }
+  .Profile_Card .User_Details > p {
+    font-size: 24px;
+  }
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+  .Account_Top > h1 {
+    font-size: 36px;
+  }
+  .Account_bottom .Profile_Card{
+    width: 250px;
+  }
+  .Profile_Card .Profile > img {
+    width: 150px;
+    height: 150px;
+  }
+  .Profile_Card .User_Details > h1 {
+    font-size: 30px;
+  }
+  .Profile_Card .User_Details > p {
+    font-size: 18px;
+  }
+  .Profile_Card .User_Details1 > p {
+    font-size: 16px;
+    width: 95%;
+  }
+  .Profile_Card .User_Details1 > h5 {
+    font-size: 20px;
+  }
+  .Profile_Card > button {
+    width: 100%;
+    height: 45px;
+    font-size: 18px;
+  }
+}
+
+/* Small mobile view */
+@media (max-width: 480px) {
+  .Account_Top {
+    height: 35vh;
+  }
+  .Profile_Card {
+    padding: 30px 10px;
+    gap: 15px;
+  }
+  .Profile_Card .Profile > img {
+    width: 120px;
+    height: 120px;
+  }
+  .Profile_Card .User_Details > p {
+    font-size: 16px;
+  }
+  .Profile_Card .User_Details1 > p {
+    font-size: 14px;
+  }
+  .Profile_Card > button {
+    font-size: 16px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+
+.Total_Login{
+  padding: 150px 100px;
+}
+
+.Login_Title{
+  max-width: 400px;
+}
+.Login_Title>h1{
+  font-size: 20px;
+}
+.Login_Title>h2{
+  font-size: 40px;
+  margin-top: 30px;
+  color: #B71C1C;
+}
+.Login_Fields{
+  background-color: #da6f3e;
+  max-width: 400px;
+  height:300px;
+  border-radius: 0px 10px 10px 0px;
+  padding: 20px;
+}
+}
+
+
+@media (max-width: 480px) {
+  .Total_Login {
+    padding: 180px 10px;
+  }
+
+    .Login_Fields{
+      max-width: 320px;
+    }
+
+  .Login_Fields > form > input,
+  .spanInputLogin {
+    height: 36px;
+    font-size: 15px;
+    padding-left: 10px;
+  }
+
+  .spanInputLogin > input {
+    font-size: 15px;
+  }
+
+  .Login_Fields > p {
+    font-size: 14px;
+  }
+
+  .Total_SignUp .signUp_Page .SignUp_ButtonDiv >.Link{
+  padding:10px 15px;
+  font-size: 15px;
+  }
+  .Total_SignUp{
+    padding: 5px;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .Total_UserForm {
+    left: 50%;
+    top: 80px;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 500px;
+    padding: 15px;
+  }
+
+  .Total_UserForm .User_Form form > label,
+  .Total_UserForm .User_Form form > input {
+    width: 100%;
+  }
+}
+
+/* Mobile devices */
+@media (max-width: 480px) {
+  .Total_UserForm {
+    transform: none;
+    width: 95%;
+    padding: 10px;
+    gap: 20px;
+    position: absolute;
+    top: 140px;
+    left: 20px;
+  }
+
+  .Form_Title {
+    width: 100%;
+  }
+
+  .Form_Title > h1 {
+    font-size: 20px;
+  }
+
+  .Form_Title > i {
+    font-size: 24px;
+  }
+
+  .Total_UserForm .User_Form form > label,
+  .Total_UserForm .User_Form form > input {
+    max-width: 70%;
+    font-size: 15px;
+    height: 36px;
+    padding-left: 10px;
+  }
+
+    .Total_UserForm .User_Form form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+  .Total_UserForm .User_Form .spanInput{
+        max-width: 70%;
+  }
+}
+
+/* Mobile Responsive CSS */
+@media (max-width: 480px) {
+  .Total_KarmikaForm {
+    top: 100px;
+    right: 20px;
+    left: 20px; /* make it centered on small screens */
+    padding: 20px 15px;
+    gap: 20px;
+    border-radius: 5px;
+  }
+
+  .Karmika_Form form>input,
+  .Karmika_Form form>label,
+  .spanInput,
+  .Karmika_Form form>.select {
+    width: 100%; /* full width on mobile */
+    height: 40px;
+    font-size: 16px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .spanInput {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .spanInput>input {
+    font-size: 16px;
+  }
+
+  .spanInput>i {
+    font-size: 18px; /* easier to tap */
+  }
+
+  .Karmika_Form form>label {
+    padding-top: 8px;
+    font-size: 16px;
+  }
+
+  .Karmika_Form form {
+    gap: 15px;
+  }
+
+  .Total_KarmikaForm {
+    animation: rightSlide 0.3s ease-in;
   }
 }
