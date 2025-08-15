@@ -1,6 +1,7 @@
-// // CRA uses process.env.REACT_APP_* for environment variables
-// // Make sure you have REACT_APP_API_URL set in your .env file
-// export const API_URL =
-//   process.env.REACT_APP_API_URL || "http://localhost:5000";
+// config.js
 
-export const API_URL = "http://localhost:5000";
+// CRA (Create React App) uses process.env.REACT_APP_* for environment variables
+// This will use the Railway backend URL in production (from Vercel settings)
+// and fallback to localhost when running locally.
+export const API_URL =
+  process.env.REACT_APP_API_URL || "http://localhost:5000";
