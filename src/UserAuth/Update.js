@@ -1,79 +1,129 @@
-import React, { useState } from 'react'
-import { updateUser } from '../authSlice';
-import { useDispatch } from 'react-redux';
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { API_URL } from "../config";
 
-import { useSelector } from 'react-redux';
-import { updatePhoto } from '../authSlice';
+function Update({ updateClick, onClose }) {
+  const user = useSelector((state) => state.auth.user);
+  const navigate = useNavigate();
 
+  const base = {
+    contact: user.contact,
+    email: user.email,
+  };
+  if (user.name) base.name = user.name;
+  else base.Username = user.Username;
+  if (user.price) base.price = user.price;
+  if (user.address) base.address = user.address;
 
-function Update({updateClick,onClose}) {
-    const user = useSelector(state=> state.auth.user)
+  const [updateDetails, setUpdateDetails] = useState(base);
 
-    const [selectedFile, setSelectedFile] = useState(null);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUpdateDetails((prev) => ({ ...prev, [name]: value }));
+  };
 
-    const handleFileChange = (event) => {
-      setSelectedFile(event.target.files[0]);
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      // Determine userType consistently
+      const userType = user.name ? "karmikas" : "users";
 
+      // Step 1: send OTP with proper purpose
+      await axios.post(`${API_URL}/api/otp/send-otp`, {
+        email: updateDetails.email,
+        userType,
+        purpose: "profile_update",
+      });
 
-    const newObject={ contact: user.contact,email: user.email}
-    if (user.name){
-        newObject.name= user.name
+      // Step 2: go to verify page carrying userType & details
+      navigate("/verify-otp", {
+        state: {
+          action: "update",
+          data: { ...updateDetails, userType },
+        },
+      });
+    } catch (err) {
+      alert(err.response?.data?.message || "Failed to send OTP for update");
     }
-    else{
-        newObject.Username= user.Username
-    }
+  };
 
-    if(user.price){
-        newObject.price= user.price
-    }
-   
-
-
-    console.log(newObject)
-    const [updateDetails,setUpdateDetails]=useState(newObject)
-    const dispatch = useDispatch()
-    const handleChnage=(e)=>{
-        const {name,value}=e.target;
-        setUpdateDetails({
-            ...updateDetails,
-            [name]:value
-        })
-    }
-
-    const handleSubmit=async (e)=>{
-        e.preventDefault()
-        await dispatch(updateUser({updateDetails}))
-
-
-    }
-
-
-console.log(updateDetails)
   return (
     <>
-    {updateClick && <div className='Total_KarmikaForm'>
-                    <div className='Form_Title'>
-                        <i className="fa-solid fa-square-xmark" onClick={onClose} ></i>
-                        <h1>Hello Karmika,</h1>
-                    </div>
-                    <div className='Karmika_Form'>
-                        <form onSubmit={handleSubmit} >
-                            {user.name ? (<input type='text' name='name' placeholder='Enter Name' value={updateDetails.name}  onChange={handleChnage} />):(<input type='text' name='Username' placeholder='Enter Name' value={updateDetails.Username}  onChange={handleChnage} />) }
-                             <input type='email' name='email' placeholder='enter your email' value={updateDetails.email}  onChange={handleChnage}  />
-                            <input type='text' name='contact' placeholder='Enter Contact Number' value={updateDetails.contact}  onChange={handleChnage}/>
-                            {/* {user.image ? (<input className='spanInputFile' id='ProfileImageFile' type='file' name='image' value={updateDetails.image} onChange={handleChnage}  />):(<input className='spanInputFile' id='ProfileImageFile' type='file' name='profileImage' value={updateDetails.image} onChange={handleChnage}  />)}
-                            <label htmlFor='ProfileImageFile'><i style={{ marginRight: 20 }} className="fa-solid fa-file-arrow-up"></i>Upload Profile Image</label>
-                            {user.price &&  <input type='text' placeholder='Enter your price per Day' name="price" value={updateDetails.price} onChange={handleChnage} />} */}
-                            {user.address &&  <input type='text' name='address' placeholder='Enter your Address' value={updateDetails.address} onChange={handleChnage}  /> } 
-                           
-                            <input type='submit' style={{ backgroundColor: "#B71C1C", color: "#ffff", cursor: "pointer", fontSize: "25px" }} />
-                           
-                        </form>
-                    </div>
-    </div>  }
+      {updateClick && (
+        <div className="Total_KarmikaForm">
+          <div className="Form_Title">
+            <i className="fa-solid fa-square-xmark" onClick={onClose}></i>
+            <h1>Hello {user.name ? "Karmika" : "User"},</h1>
+          </div>
+          <div className="Karmika_Form">
+            <form onSubmit={handleSubmit}>
+              {user.name ? (
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Enter Name"
+                  value={updateDetails.name}
+                  onChange={handleChange}
+                />
+              ) : (
+                <input
+                  type="text"
+                  name="Username"
+                  placeholder="Enter Name"
+                  value={updateDetails.Username}
+                  onChange={handleChange}
+                />
+              )}
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                value={updateDetails.email}
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                name="contact"
+                placeholder="Enter Contact Number"
+                value={updateDetails.contact}
+                onChange={handleChange}
+              />
+              {user.price && (
+                <input
+                  type="text"
+                  placeholder="Enter your price per Day"
+                  name="price"
+                  value={updateDetails.price}
+                  onChange={handleChange}
+                />
+              )}
+              {user.address && (
+                <input
+                  type="text"
+                  name="address"
+                  placeholder="Enter your Address"
+                  value={updateDetails.address}
+                  onChange={handleChange}
+                />
+              )}
+              <input
+                type="submit"
+                value="Update Profile"
+                style={{
+                  backgroundColor: "#B71C1C",
+                  color: "#ffff",
+                  cursor: "pointer",
+                  fontSize: "25px",
+                }}
+              />
+            </form>
+          </div>
+        </div>
+      )}
     </>
-  )
+  );
 }
 
-export default Update
+export default Update;

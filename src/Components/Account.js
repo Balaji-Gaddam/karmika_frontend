@@ -1,39 +1,37 @@
-import React, { useState } from 'react';
-import NavBar from './NavBar';
+import React, { useState, useEffect } from 'react';
 import '../App.css';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Update from '../UserAuth/Update';
-
+import { fetchUser } from '../authSlice';  
 
 function Account() {
-  const [updateClick,setUpdateClick]=useState(false)
-  const [onClose,setOnclose] = useState(false)
-
-
+  const [updateClick, setUpdateClick] = useState(false);
   const user = useSelector(state => state.auth.user);
-  console.log(user);
+  const dispatch = useDispatch();
 
+  // Run once on mount and whenever updateClick closes
+  useEffect(() => {
+    if (!updateClick) {
+      dispatch(fetchUser());
+    }
+  }, [updateClick, dispatch]);
 
-  const handleClickfunction=()=>{
-    setUpdateClick(true)
-    setOnclose(true)
-  }
+  const handleClickfunction = () => {
+    setUpdateClick(true);
+  };
 
   return (
     <>
       {user ? (
         <div className='Total_Account_page'>
-          <div className='Account_Top'>
-            {/* Add content here if needed */}
-          </div>
+          <div className='Account_Top'></div>
           <div className='Account_bottom'>
             <div className='Profile_Card'>
               <div className='Profile'>
-                {user.image ? 
-                  <img src={user.image} alt='User Profile' /> 
-                : 
-                  <img src={user.profileImage} alt='User Profile' />
+                {user.image 
+                  ? <img src={user.image} alt='User Profile' /> 
+                  : <img src={user.profileImage} alt='User Profile' />
                 }
               </div>
               <div className='User_Details'>
@@ -52,29 +50,32 @@ function Account() {
         </div>
       ) : (
         <div className='Total_Account_page'>
-        <div className='Account_Top'>
-          {/* Add content here if needed */}
-        </div>
-        <div className='Account_bottom'>
-          <div className='Profile_Card'>
-            <div className='Profile'>
-              <img
-                src='https://www.shareicon.net/data/128x128/2016/07/05/791214_man_512x512.png'
-                alt='User Profile'
-              />
+          <div className='Account_Top'></div>
+          <div className='Account_bottom'>
+            <div className='Profile_Card'>
+              <div className='Profile'>
+                <img
+                  src='https://www.shareicon.net/data/128x128/2016/07/05/791214_man_512x512.png'
+                  alt='User Profile'
+                />
+              </div>
+              <div className='User_Details'>
+                <p>No Account details </p>
+                <p>please Login</p>
+              </div>
+              <div className='User_Details1'></div>
+              <button><Link className='link' to="/login">login</Link></button>
             </div>
-            <div className='User_Details'>
-              <p>No Account details </p>
-              <p>please Login</p>
-            </div>
-            <div className='User_Details1'>
-            </div>
-             <button><Link className='link' to="/login">login</Link></button>
           </div>
         </div>
-      </div>
       )}
-     {user && updateClick ? <Update updateClick={updateClick} onClose={()=>setUpdateClick(false)} setUpdateClick={setUpdateClick}/> : ""}
+      {user && updateClick && (
+        <Update
+          updateClick={updateClick}
+          onClose={() => setUpdateClick(false)}
+          setUpdateClick={setUpdateClick}
+        />
+      )}
     </>
   );
 }

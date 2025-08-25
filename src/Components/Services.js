@@ -2,6 +2,9 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Details from './Details'
 import { API_URL } from '../config'
+import { fetchUser } from '../authSlice';  
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 function Services() {
   const [data, setData] = useState([])
@@ -12,6 +15,8 @@ function Services() {
   const [error, setError] = useState("")
   const [isError, setIsError] = useState({ status: false, message: "" })
   const [revealedContacts, setRevealedContacts] = useState({})
+  const [loading, setLoading] = useState(false) 
+  const user = useSelector(state => state.auth.user);
 
   const fetchingData = async () => {
     try {
@@ -29,24 +34,42 @@ function Services() {
   }, [])
 
   useEffect(() => {
+    setLoading(true) // start loading
     const handler = setTimeout(() => {
-      const filtered = data.filter(karmika =>
-        karmika.name.toLowerCase().includes(searchItem.toLowerCase()) ||
-        karmika.workType.toLowerCase().includes(searchItem.toLowerCase())
-      )
+      let filtered = data
+
+      // Search filter
+      if (searchItem.trim()) {
+        filtered = filtered.filter(karmika => {
+          const name = karmika.name ? karmika.name.toLowerCase() : ""
+          const workType = karmika.workType ? karmika.workType.toLowerCase() : ""
+          return (
+            name.includes(searchItem.toLowerCase()) ||
+            workType.includes(searchItem.toLowerCase())
+          )
+        })
+      }
+
+      // Dropdown filter
+      if (selectedItem !== "Choose Profession" && selectedItem !== "All Karmikas") {
+        filtered = filtered.filter(karmika => {
+          const workType = karmika.workType ? karmika.workType.toLowerCase() : ""
+          return workType.includes(selectedItem.toLowerCase())
+        })
+      }
 
       if (filtered.length === 0) {
         setIsError({ status: true, message: "No Karmika Available" })
       } else {
         setIsError({ status: false, message: "" })
-        setFilteredData(filtered)
       }
-    }, 300) // 300ms delay
 
-    return () => {
-      clearTimeout(handler)
-    }
-  }, [searchItem, data])
+      setFilteredData(filtered)
+      setLoading(false) // ✅ stop loading when done
+    }, 500)
+
+    return () => clearTimeout(handler)
+  }, [searchItem, selectedItem, data])
 
   const handleDetailsShow = (index) => {
     setSelectedUser(filteredData[index])
@@ -60,26 +83,11 @@ function Services() {
     setSearchItem(e.target.value)
   }
 
-  const handleSearchClick = async () => {
-    if (selectedItem !== "Choose Profession") {
-      setError("")
-
-      if (selectedItem === "All Karmikas") {
-        setFilteredData(data)
-        setIsError({ status: false, message: "" })
-      } else {
-        const chosenItem = data.filter(karmika =>
-          karmika.workType.toLowerCase().includes(selectedItem.toLowerCase())
-        )
-        if (chosenItem.length === 0) {
-          setIsError({ status: true, message: "No Karmika Available for the selected profession" })
-        } else {
-          setIsError({ status: false, message: "" })
-          setFilteredData(chosenItem)
-        }
-      }
-    } else {
+  const handleSearchClick = () => {
+    if (selectedItem === "Choose Profession") {
       setError("Please select a profession")
+    } else {
+      setError("")
     }
   }
 
@@ -92,76 +100,92 @@ function Services() {
 
   return (
     <>
-      <div className='Total_Servies'>
-        <div className='search_Option_Div'>
-          <select onChange={(e) => setSelectedItem(e.target.value)}>
-            <option>Choose Profession</option>
-            <option>All Karmikas</option>
-            <option>electrician</option>
-            <option>cleaner</option>
-            <option>constructor</option>
-            <option>cook</option>
-            <option>delivery</option>
-            <option>doctor</option>
-            <option>gardening</option>
-            <option>painter</option>
-            <option>plumber</option>
-            <option>servant</option>
-            <option>Carpenter</option>
-            <option>Tech Service (mobile, laptop, T.V)</option>
-          </select>
-          <button onClick={handleSearchClick}>Search</button>
-          {error && <p style={{ color: "red" }}>{error}</p>}
-        </div>
-        <div className='search_karmikas_Div'>
-          <div className='Seach_div'>
-            <input type='text' placeholder='Search karmika' onChange={searchKarmika} />
-            <i className="fa-solid fa-magnifying-glass"></i>
+      {user ? (
+        <div className='Total_Servies'>
+          <div className='search_Option_Div'>
+            <select onChange={(e) => setSelectedItem(e.target.value)}>
+              <option>Choose Profession</option>
+              <option>All Karmikas</option>
+              <option>electrician</option>
+              <option>cleaner</option>
+              <option>constructor</option>
+              <option>cook</option>
+              <option>delivery</option>
+              <option>doctor</option>
+              <option>gardening</option>
+              <option>painter</option>
+              <option>plumber</option>
+              <option>servant</option>
+              <option>Carpenter</option>
+              <option>Tech Service (mobile, laptop, T.V)</option>
+            </select>
+            {error && <p style={{ color: "red" }}>{error}</p>}
           </div>
-          <div className='total_Karmikas'>
-            {!isError.status ? (
-              filteredData.map((karmika, index) => {
-                const { name, contact, profileImage, workType, price } = karmika;
-                return (
-                  <div className='Karmika_Card' key={index}>
-                    <img src={profileImage} alt='' />
-                    <div className='Karmika_details'>
-                      <h2>{name}</h2>
-                      <p>{workType}</p>
-                      <hr></hr>
-                      <div className='Karmika_Price'>
-                        <p>${price}</p>
-                        <a href={`https://wa.me/${contact}`}  target="_blank"><i className="fa-brands fa-whatsapp"></i></a>
-                      </div>
-                      <div className='karmika_buttons'>
-                        <a 
-                          href={`tel:${contact}`} 
-                          onClick={(e) => {
-                            if (!revealedContacts[index]) {
-                              e.preventDefault()
-                              handleShowNumber(index)
-                            }
-                          }}
-                          target='_blank'
-                        >
-                          <span><i className="fa-solid fa-phone"></i></span>
-                          {revealedContacts[index] ? contact : "Show Number"}
-                        </a>
-                        <button className='karmika_details_button' onClick={() => handleDetailsShow(index)}>Details</button>
+
+          <div className='search_karmikas_Div'>
+            <div className='Seach_div'>
+              <input type='text' placeholder='Search karmika' onChange={searchKarmika} />
+              <i className="fa-solid fa-magnifying-glass"></i>
+            </div>
+
+            {loading && <p style={{ color: "blue" }}>🔄 Searching...</p>}
+
+            <div className='total_Karmikas'>
+              {!loading && !isError.status ? (
+                filteredData.map((karmika, index) => {
+                  const { name, contact, profileImage, workType, price } = karmika;
+                  return (
+                    <div className='Karmika_Card' key={index}>
+                      <img src={profileImage} alt='' />
+                      <div className='Karmika_details'>
+                        <h2>{name || "Unknown"}</h2>
+                        <p>{workType || "Not Provided"}</p>
+                        <hr />
+                        <div className='Karmika_Price'>
+                          <p>&#x20B9; {price || 0}</p>
+                          <a href={`https://wa.me/${contact}`} target="_blank" rel="noreferrer">
+                            <i className="fa-brands fa-whatsapp"></i>
+                          </a>
+                        </div>
+                        <div className='karmika_buttons'>
+                          <a
+                            href={`tel:${contact}`}
+                            onClick={(e) => {
+                              if (!revealedContacts[index]) {
+                                e.preventDefault();
+                                handleShowNumber(index);
+                              }
+                            }}
+                            target='_blank'
+                            rel="noreferrer"
+                          >
+                            <span><i className="fa-solid fa-phone"></i></span>
+                            {revealedContacts[index] ? contact : "Show Number"}
+                          </a>
+                          <button className='karmika_details_button' onClick={() => handleDetailsShow(index)}>Details</button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                )
-              })
-            ) : <h1 style={{ color: "red" }}>{isError.message}</h1>}
+                  )
+                })
+              ) : !loading && <h1 style={{ color: "red" }}>{isError.message}</h1>}
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <>
+        <div style={{display:"flex", alignItems:"center", justifyContent:"center", height:"90vh", flexDirection:"column", gap:"20px"}}>
+            <h1 style={{fontSize:"50px", color:"red"}}>Please Login for services</h1>
+            <button style={{backgroundColor:"red", color:"white",border:"none", textDecoration:"none", padding:"15px 35px", borderRadius:"5px"}}><Link className='link' to="/login" style={{textDecoration:"none", color:"white", fontSize:"25px"}}>login</Link></button>
+        </div>
+        </>
+      )}
+
       <div className='Details_Card'>
         {selectedUser && <Details selectedUser={selectedUser} onClose={handleCloseDetails} />}
       </div>
     </>
-  )
+  );
 }
 
 export default Services
