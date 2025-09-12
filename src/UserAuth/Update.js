@@ -26,6 +26,7 @@ function Update({ updateClick, onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("otp request initiated")
     try {
       // Determine userType consistently
       const userType = user.name ? "karmikas" : "users";
