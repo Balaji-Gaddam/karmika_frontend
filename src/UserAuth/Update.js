@@ -36,6 +36,7 @@ function Update({ updateClick, onClose }) {
         userType,
         purpose: "profile_update",
       });
+      console.log("otp sent successfully")
 
       // Step 2: go to verify page carrying userType & details
       navigate("/verify-otp", {
@@ -46,6 +47,7 @@ function Update({ updateClick, onClose }) {
       });
     } catch (err) {
       alert(err.response?.data?.message || "Failed to send OTP for update");
+      console.log(err)
     }
   };
 
