@@ -39,6 +39,7 @@ function Update({ updateClick, onClose }) {
       });
       console.log("otp sent successfully")
 
+
       // Step 2: go to verify page carrying userType & details
       navigate("/verify-otp", {
         state: {
