@@ -106,18 +106,18 @@ function Services() {
             <select onChange={(e) => setSelectedItem(e.target.value)}>
               <option>Choose Profession</option>
               <option>All Karmikas</option>
-              <option>electrician</option>
-              <option>cleaner</option>
-              <option>constructor</option>
-              <option>cook</option>
-              <option>delivery</option>
-              <option>doctor</option>
-              <option>gardening</option>
-              <option>painter</option>
-              <option>plumber</option>
-              <option>servant</option>
+              <option>Electretion</option>
+              <option>Cleaner</option>
+              <option>Constructor</option>
+              <option>Cook</option>
+              <option>Delivery Person</option>
+              <option>Doctor</option>
+              <option>Gardener</option>
+              <option>Painter</option>
+              <option>Plumber</option>
+              <option>Servants</option>
               <option>Carpenter</option>
-              <option>Tech Service (mobile, laptop, T.V)</option>
+              <option>Tech Repair Specialist(mobile, laptop, T.V)</option>
             </select>
             {error && <p style={{ color: "red" }}>{error}</p>}
           </div>

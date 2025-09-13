@@ -26,7 +26,6 @@ function Update({ updateClick, onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("otp request initiated")
     try {
       // Determine userType consistently
       const userType = user.name ? "karmikas" : "users";
@@ -37,8 +36,8 @@ function Update({ updateClick, onClose }) {
         userType,
         purpose: "profile_update",
       });
-      console.log("otp sent successfully")
 
+      alert(`otp sent to the email ${updateDetails.email}`)
 
       // Step 2: go to verify page carrying userType & details
       navigate("/verify-otp", {
@@ -47,6 +46,8 @@ function Update({ updateClick, onClose }) {
           data: { ...updateDetails, userType },
         },
       });
+
+      alert("Profile updated successfully")
     } catch (err) {
       alert(err.response?.data?.message || "Failed to send OTP for update");
       console.log(err)

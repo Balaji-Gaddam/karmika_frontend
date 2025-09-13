@@ -146,6 +146,8 @@ function SignUpform({ userType, onClose, closeForm, closeKarmika }) {
             data: { ...karmikaDetails, userType: "karmikas" }, 
           },
         });
+
+        alert("Registred successfully")
       } catch (error) {
         console.error(error);
         alert(error.response?.data?.message || "Failed to send OTP");
@@ -294,18 +296,18 @@ function SignUpform({ userType, onClose, closeForm, closeKarmika }) {
                 value={karmikaDetails.workType}
               >
                 <option>Select your type of Work</option>
-                <option>electrician</option>
-                <option>cleaner</option>
-                <option>constructor</option>
-                <option>cook</option>
-                <option>delivery</option>
-                <option>doctor</option>
-                <option>gardening</option>
-                <option>painter</option>
-                <option>plumber</option>
-                <option>servant</option>
+                <option>Electretion</option>
+                <option>Cleaner</option>
+                <option>Constructor</option>
+                <option>Cook</option>
+                <option>Delivery Person</option>
+                <option>Doctor</option>
+                <option>Gardener</option>
+                <option>Painter</option>
+                <option>Plumber</option>
+                <option>Servants</option>
                 <option>Carpenter</option>
-                <option>Tech Service (mobile, laptop, TV)</option>
+                <option>Tech Repair Specialist(mobile, laptop, TV)</option>
               </select>
               <input
                 type="text"

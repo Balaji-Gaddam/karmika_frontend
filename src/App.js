@@ -27,9 +27,6 @@ function App() {
     if (!token) return; 
     dispatch(fetchUser())
       .unwrap()
-      .then((res) => {
-        console.log("User fetched:", res);
-      })
       .catch((err) => {
         console.warn("Backend not available or token invalid. Clearing token.");
         localStorage.removeItem("token"); 

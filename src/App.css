@@ -1710,3 +1710,25 @@ padding-right: 20px;
     animation: rightSlide 0.3s ease-in;
   }
 }
+
+.Login_Fields >form >select{
+  width: 300px;
+  height: 40px;
+  border:none;
+  outline: none;
+  border-radius: 3px;
+  padding-left: 20px;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.Karmika_Form > form> select{
+  width: 400px;
+  height: 40px;
+  border:none;
+  outline: none;
+  border-radius: 3px;
+  padding-left: 20px;
+  font-size: 17px;
+  font-weight: 500;
+}
