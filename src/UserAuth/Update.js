@@ -40,7 +40,7 @@ function Update({ updateClick, onClose }) {
       alert(`otp sent to the email ${updateDetails.email}`)
 
       // Step 2: go to verify page carrying userType & details
-      navigate("/verify-otp", {
+      await navigate("/verify-otp", {
         state: {
           action: "update",
           data: { ...updateDetails, userType },
